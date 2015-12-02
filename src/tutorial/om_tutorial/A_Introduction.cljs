@@ -41,7 +41,7 @@
 
 (defcard-doc
   "
-  Open up the A_Introduction.cljs, search for `simple-card`, edit the numbers, save, and watch this page refresh. You
+  Open up the A_Introduction.cljs, search for `sample-card`, edit the numbers, save, and watch this page refresh. You
   are encouraged to play with the source code and examples in the tutorial to verify your understanding as you read.
   Devcards support state as well, and will track it in an atom for you. Thus, you can generate UI that actually responds
   to user interaction:
