@@ -13,6 +13,7 @@
     om-tutorial.F-Mutation
     om-tutorial.F-Mutation-Exercises
     om-tutorial.G-Remote-Fetch
+    om-tutorial.G-Remote-Fetch-Service
     om-tutorial.H-Remote-Mutation
     om-tutorial.I-Path-Optimization
     om-tutorial.J-Advanced-Queries
