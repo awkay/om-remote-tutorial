@@ -5,6 +5,8 @@
             [devcards.core :as dc :refer-macros [defcard defcard-doc deftest]]
             [cljs.reader :as r]))
 
+(declare cars-table favorites ex3-uidb)
+
 (defcard-doc
   "
   # App Database Exercises
