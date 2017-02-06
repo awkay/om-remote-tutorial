@@ -2,6 +2,7 @@
   :description "A Tutorial for Om 1.0.0 (next)"
   :dependencies [[org.clojure/clojure "1.7.0" :scope "provided"]
                  [org.clojure/clojurescript "1.7.170" :scope "provided"]
+                 [org.clojure/core.async "0.2.374"]
                  [devcards "0.2.1-2" :exclusions [org.omcljs/om cljsjs/react-dom org.clojure/tools.reader cljsjs/react]]
                  [datascript "0.13.3"]
                  [org.omcljs/om "1.0.0-alpha26"]
