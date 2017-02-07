@@ -66,7 +66,8 @@
   "The resulting card looks like this:"
   )
 
-(defcard widget-card (widget {}))
+  (defcard widget-card (widget {}))
+
 
 (defcard-doc
   "Such components are known as \"stateless components\" in Om because they do not explicitly ask for data. Later,
@@ -173,7 +174,7 @@
   having a stateless UI. In React, you also pass your callbacks through props. In Om, we need a slight variation of
   this.
 
-  In Om, a component can have a query that asks the underlying system for data. If you complect callbacks and such
+  In Om, a component can have a query that asks the underlying system for data. If you complete callbacks and such
   with this queried data then you run into trouble. So, in general *props have to do with passing data that
   the component requested from a query*.
 
