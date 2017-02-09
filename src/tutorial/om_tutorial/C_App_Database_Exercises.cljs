@@ -2,9 +2,10 @@
   (:require-macros [cljs.test :refer [is]])
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [om-tutorial.app-database.exercises :refer [cars-table favorites ex3-uidb]]
             [devcards.core :as dc :refer-macros [defcard defcard-doc deftest]]
             [cljs.reader :as r]))
+
+(declare cars-table favorites ex3-uidb)
 
 (defcard-doc
   "
@@ -20,7 +21,7 @@
   "In this exercise, you'll verify that you understand how to create a
   database table in the default Om database format.
 
-  Create a table named `:cars/by-id` with the following items:
+  Create a table named `cars-table` with the following items:
 
   ```
   { :id 1 :make \"Nissan\" :model \"Leaf\" }
@@ -39,9 +40,8 @@
   "In this exercise, you'll use Idents to link together data
   in an app database.
 
-  Merge the cars table into provided favorites database, then
-  add a `:favorite-car` key that uses an ident to reference
-  the Nissan Leaf.
+  Create a new table called `favorites` that contains the cars-table and
+  `:favorite-car` key that uses an ident to reference the Nissan Leaf.
 
   "
   (is (= "Nissan" (->> (get favorites :favorite-car) (get-in favorites) (:make)))))
@@ -57,9 +57,10 @@
                   :canvas  { :data [ {:id 5 :x 1 :y 3} ]}}}
   ```
 
-  but you want to normalize tool instances using `:tools/by-id`, data via `:data/by-id`.
-  Use the invented idents `[:toolbar :main]` and `[:canvas :main]` to move the toolbar and canvas to
-  tables of their own.
+  but you want to normalize tool instances using `:tools/by-id`, data
+  via `:data/by-id`.  Use the invented idents `[:toolbar :main]` and
+  `[:canvas :main]` to move the toolbar and canvas to tables of their
+  own.
 
   Build the normalized database in `ex3-uidb`.
 
