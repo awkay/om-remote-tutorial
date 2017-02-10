@@ -1,16 +1,17 @@
 (defproject om-tutorial "0.1.0-SNAPSHOT"
   :description "A Tutorial for Om 1.0.0 (next)"
-  :dependencies [[org.clojure/clojure "1.7.0" :scope "provided"]
-                 [org.clojure/clojurescript "1.7.170" :scope "provided"]
-                 [devcards "0.2.1-2" :exclusions [org.omcljs/om cljsjs/react-dom org.clojure/tools.reader cljsjs/react]]
-                 [datascript "0.13.3"]
-                 [org.omcljs/om "1.0.0-alpha26"]
-                 [figwheel-sidecar "0.5.0-3" :exclusions [clj-time joda-time org.clojure/tools.reader] :scope "test"]
-                 [cljsjs/codemirror "5.8.0-0"]]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14" :scope "provided"]
+                 [org.clojure/clojurescript "1.9.456" :scope "provided"]
+                 [devcards "0.2.2" :exclusions [org.omcljs/om cljsjs/react-dom org.clojure/tools.reader cljsjs/react]]
+                 [datascript "0.15.5"]
+                 [org.omcljs/om "1.0.0-alpha47"]
+                 [figwheel-sidecar "0.5.9" :exclusions [clj-time joda-time org.clojure/tools.reader] :scope "test"]
+                 [cljsjs/codemirror "5.21.0-2"]]
 
   :source-paths ["src/main" "src/cards" "src/tutorial"]
 
-  :plugins [[lein-cljsbuild "1.1.1"]]
+  :plugins [[lein-cljsbuild "1.1.5"]
+            [lein-ancient "0.6.10"]]
 
   :clean-targets ^{:protect false} ["resources/public/js" "resources/public/cards" "resources/public/tutorial" "target"]
 
@@ -84,7 +85,7 @@
                                   [org.clojure/tools.nrepl "0.2.12"]]
                    :repl-options {:init-ns user
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]
-                                  :port    7001}
-                   }
-             }
-  )
+                                  :port    7001}}})
+
+
+

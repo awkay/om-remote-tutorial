@@ -3,6 +3,7 @@
     om-tutorial.A-Introduction
     om-tutorial.B-UI
     om-tutorial.B-UI-Exercises
+    om-tutorial.B-UI-Solutions
     om-tutorial.C-App-Database
     om-tutorial.C-App-Database-Exercises
     om-tutorial.D-Queries

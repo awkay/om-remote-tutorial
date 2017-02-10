@@ -1,12 +1,12 @@
 (ns om-tutorial.B-UI
   (:require-macros
-    [cljs.test :refer [is]]
-    )
+    [cljs.test :refer [is]])
+
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
-            [devcards.core :as dc :refer-macros [defcard defcard-doc]]
-            ))
-
+            [devcards.core :as dc :refer-macros [defcard defcard-doc]]))
+;
+;
 (defui Widget
   Object
   (render [this]
@@ -63,8 +63,8 @@
   (defcard widget-card (widget {}))
   ```
   "
-  "The resulting card looks like this:"
-  )
+  "The resulting card looks like this:")
+
 
 (defcard widget-card (widget {}))
 
@@ -81,8 +81,8 @@
   ```
   (defcard props-card (prop-widget {:name \"Sam\"}))
   ```
-  "
-  )
+  ")
+
 
 (defcard props-card (prop-widget {:name "Sam"}))
 
@@ -107,12 +107,12 @@
   (render [this]
     (let [{:keys [people number]} (om/props this)]
       (dom/div nil
-        (dom/span nil (str "My lucky number is " number " and I have the following friends:"))
-        (people-list people)))))
+        (dom/span nil (str "My lucky number is " number " and I have the following friends:"))))))
+        ;(people-list people)))))
 
 (def root (om/factory Root))
 
-(defcard-doc
+#_(defcard-doc)
   "
   ## Composing the UI
 
@@ -145,7 +145,7 @@
   At this point (if you have not already) you should play with the code in `B-UI.cljs`. Search for `root-render`
   and then scan backwards to the source. You should try adding an object to the properties (another person),
   and also try playing with editing/adding to the DOM.
-  ")
+  "
 
 (defcard root-render (root {:number 52 :people [{:name "Sam"} {:name "Joe"}]}))
 
@@ -202,8 +202,8 @@
   (fn [data-atom-from-devcards _]
     (let [prop-data @data-atom-from-devcards
           sideband-data {:incHandler  (fn [] (swap! data-atom-from-devcards update-in [:number] inc))
-                         :boolHandler (fn [] (swap! data-atom-from-devcards update-in [:b] not))}
-          ]
+                         :boolHandler (fn [] (swap! data-atom-from-devcards update-in [:b] not))}]
+
       (root-computed (om/computed prop-data sideband-data))))
   {:number 42 :people [{:name "Sally"}] :b false}
   {:inspect-data true
@@ -228,8 +228,8 @@
   (dc/mkdn-pprint-source Styled-component))
 
 (defcard styling-example
-         (styled-component)
-         )
+         (styled-component))
+
 
 (defcard-doc
   "
