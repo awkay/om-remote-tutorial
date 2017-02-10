@@ -1,4 +1,4 @@
-(ns om-tutorial.B-UI-Solutions
+(ns om-tutorial.B-UI-Exercises
   (:require-macros [cljs.test :refer [is]])
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]

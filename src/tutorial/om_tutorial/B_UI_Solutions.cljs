@@ -1,4 +1,4 @@
-(ns om-tutorial.B-UI-Exercises
+(ns om-tutorial.B-UI-Solutions
   (:require-macros [cljs.test :refer [is]])
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
@@ -76,7 +76,6 @@
           name (:person/name (om/props this)) ;; ANS (ex 1): Get the Om properties from this
           mate (:person/mate (om/props this)) ;; ANS (ex 1): Get the Om properties from this
           checked (om/get-state this :checked)] ;; ANS (ex 3.2): component local state
-      (println onDelete)
       (dom/li nil
         (dom/input #js {:type "checkbox"
                         :onClick (fn [e] (om/update-state! this update :checked not)) ;; ANS: ex-3.3: modify local state
