@@ -6,6 +6,7 @@
     om-tutorial.B-UI-Solutions
     om-tutorial.C-App-Database
     om-tutorial.C-App-Database-Exercises
+    om-tutorial.C-App-Database-Solutions
     om-tutorial.D-Queries
     om-tutorial.E-State-Reads-and-Parsing
     om-tutorial.E-State-Reads-and-Parsing-Exercises

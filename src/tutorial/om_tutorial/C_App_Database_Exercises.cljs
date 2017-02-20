@@ -31,6 +31,7 @@
   These tests shown below will pass when the table is
   correctly formatted.
   "
+
   (is (= "Nissan" (-> cars-table (get-in [:cars/by-id 1]) :make)))
   (is (= "Dodge" (-> cars-table (get-in [:cars/by-id 2]) :make)))
   (is (= "Ford" (-> cars-table (get-in [:cars/by-id 3]) :make))))
