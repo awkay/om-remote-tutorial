@@ -1,4 +1,4 @@
-(ns om-tutorial.B-UI-Exercises
+(ns om-tutorial.B-UI-Solutions
   (:require-macros [cljs.test :refer [is]])
   (:require [om.next :as om :refer-macros [defui]]
             [om.dom :as dom]
@@ -32,11 +32,11 @@
       (dom/div nil (when (not= "" last-error) (str "Error " last-error)))
       (dom/div nil
         (dom/div nil
-          (if (= nil people)
-            (dom/span nil "Loading...")
-            (people-list people))
-          (dom/input {:type "text" :value new-person})
-          (dom/button nil "Add Person"))))))
+            (if (= nil people)
+              (dom/span nil "Loading...")
+              (people-list people))
+            (dom/input {:type "text" :value new-person})
+            (dom/button nil "Add Person"))))))
 
 (defcard overall-goal
          "## Overall Goal
@@ -61,29 +61,29 @@
            (root state-atom))
          {:last-error "Some error message"
           :new-person ""
-          :people     [
-                       {:db/id 1 :person/name "Joe" :person/mate {:db/id 2 :person/name "Sally"}}
-                       {:db/id 2 :person/name "Sally" :person/mate {:db/id 1 :person/name "Joe"}}]}
+          :people [{:db/id 1 :person/name "Joe" :person/mate {:db/id 2 :person/name "Sally"}}
+                   {:db/id 2 :person/name "Sally" :person/mate {:db/id 1 :person/name "Joe"}}]}
          {:inspect-data false})
 
 (declare om-person)
 
 (defui Person
   Object
-  (initLocalState [this] {})                                ;; TODO (ex 3): Add initial local state here
+  (initLocalState [this] {:checked false}) ;; ANS (ex 3.1): Add initial local state here
 
   (render [this]
-    ;; TODO: (ex 4) obtain the 'computed' onDelete handler
-    (let [name "name"                                       ;; TODO (ex 1): Get the Om properties from this
-          mate nil
-          checked false]                                    ;; TODO (ex 3): component local state
+    (let [onDelete (:onDelete (om/get-computed this)) ;; ANS (ex 4.3): obtain the 'computed' onDelete handler
+          name (:person/name (om/props this)) ;; ANS (ex 1): Get the Om properties from this
+          mate (:person/mate (om/props this)) ;; ANS (ex 1): Get the Om properties from this
+          checked (om/get-state this :checked)] ;; ANS (ex 3.2): component local state
       (dom/li nil
-        (dom/input #js {:type    "checkbox"
-                        :onClick (fn [e] (println "TODO ex 3"))
-                        :checked false})                    ;; TODO: ex-3: modify local state
+        (dom/input #js {:type "checkbox"
+                        :onClick (fn [e] (om/update-state! this update :checked not)) ;; ANS: ex-3.3: modify local state
+                        :checked checked}) ;; ANS (ex-3.3): modify local state
 
-        (dom/span nil name)                                 ;; TODO: ex 3. Make name bold when checked
-        (dom/button nil "X")                                ;; TODO: (ex 4) call onDelete handler, if present
+        (dom/span nil (if checked (dom/b nil name) name)) ;; ANS (ex 3.4): Make name bold when checked
+        ;; ANS (ex 4.4): call onDelete handler, if present
+        (when onDelete (dom/button (clj->js {:onClick #(onDelete name)}) "X"))
         (when mate (dom/ul nil (om-person mate)))))))
 
 (def om-person (om/factory Person))
@@ -107,25 +107,24 @@
 (defui PeopleWidget
   Object
   (render [this]
-    ;; TODO: (ex 4): Create a deletePerson function
-    (let [people []]                                        ;; TODO (ex 2): Get yo stuff
+    ;; ANS (ex 4.1): Create a deletePerson function
+    (let [deletePerson (fn [e] (js/console.log "delete" e))
+          {:keys [people]} (om/props this)] ;; ANS (ex 2.2): Get yo stuff
       (dom/div nil
         (if (= nil people)
           (dom/span nil "Loading...")
           (dom/div nil
             (dom/button #js {} "Save")
             (dom/button #js {} "Refresh List")
-            ;; TODO: (ex 4) pass deletePerson as the onDelete handler to person element
-            (dom/ul nil (map #(om-person %) people))))))))
+            ;; ANS (ex 4.2): pass deletePerson as the onDelete handler to person element
+            (dom/ul nil (map #(om-person (om/computed % {:onDelete deletePerson})) people))))))))
 
 (def people-widget (om/factory PeopleWidget))
 
 (defui Root
   Object
   (render [this]
-    (let [widget nil
-          new-person nil
-          last-error nil]                                   ;; TODO (ex 2): Get yo stuff
+    (let [{:keys [widget new-person last-error]} (om/props this)] ;; ANS (ex 2.1): Get yo stuff
       (dom/div nil
         (dom/div nil (when (not= "" last-error) (str "Error " last-error)))
         (dom/div nil
@@ -149,8 +148,7 @@
            (om-root @state-atom))
          {:last-error "Some error message"
           :new-person "something typed by the user"
-          :widget     {:people [
-                                {:db/id 1 :person/name "Joe" :person/mate {:db/id 2 :person/name "Sally"}}
+          :widget     {:people [{:db/id 1 :person/name "Joe" :person/mate {:db/id 2 :person/name "Sally"}}
                                 {:db/id 2 :person/name "Sally" :person/mate {:db/id 1 :person/name "Joe"}}]}}
          {:inspect-data true})
 
@@ -217,8 +215,9 @@
            (om-root @state-atom))
          {:last-error ""
           :new-person ""
-          :widget {:people [{:db/id 1 :person/name "Joe" :person/mate {:db/id 2 :person/name "Sally"}}
-                            {:db/id 2 :person/name "Sally" :person/mate {:db/id 1 :person/name "Joe"}}]}}
+          :widget     {:people [
+                                {:db/id 1 :person/name "Joe" :person/mate {:db/id 2 :person/name "Sally"}}
+                                {:db/id 2 :person/name "Sally" :person/mate {:db/id 1 :person/name "Joe"}}]}}
          {:inspect-data true})
 
 (defcard-doc "[Next: App Database](#!/om_tutorial.C_App_Database)")
